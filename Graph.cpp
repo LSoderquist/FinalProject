@@ -53,7 +53,7 @@ void Graph::displayEdges()
     }
 }
 
-int Graph::isAdjacent(std::string v1, std::string v2){
+int Graph::flightExists(std::string v1, std::string v2){
     vertex* v;
     for (int i = 0; i < vertices.size(); i++) {
         if (vertices[i].name == v1) v = &vertices[i];
@@ -72,4 +72,9 @@ vertex* Graph::findVertex(std::string name){
         if (vertices[i].name == name) return &vertices[i];
     }
     return NULL;
+}
+
+void Graph::addPlane(string airport, int id, int fuel) {
+    vertex* a = findVertex(airport);
+    a->planes.insertPlane(id, fuel);
 }

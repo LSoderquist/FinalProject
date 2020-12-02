@@ -28,8 +28,9 @@ class Graph
         ~Graph(){}; 
         void addEdge(std::string v1, std::string v2, int weight);
         void addVertex(std::string name);
-        int isAdjacent(std::string v1, std::string v2);
+        int flightExists(std::string v1, std::string v2);
         void displayEdges();
+        void addPlane(std::string airport, int id, int fuel);
     protected:
     private:
         std::vector<vertex> vertices;
