@@ -3,6 +3,8 @@
 #include<vector>
 #include<iostream>
 
+#include "LL.h"
+
 struct vertex;
 
 struct adjVertex{
@@ -16,6 +18,7 @@ struct vertex{
     bool visited;
     int distance;
     std::vector<adjVertex> adj;
+    LL planes;
 };
 
 class Graph
