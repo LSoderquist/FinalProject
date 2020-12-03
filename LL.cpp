@@ -2,9 +2,13 @@
 
 using namespace std;
 
+LL::LL(){}
+
 void LL::insertPlane(int id, int fuel) {
     if (head == nullptr && tail == nullptr) {
         plane* temp = new plane(id, fuel);
+        temp->next = nullptr;
+        temp->prev = nullptr;
         head = temp;
         tail = temp;
     } else {
@@ -21,6 +25,7 @@ void LL::insertPlane(int id, int fuel) {
             head = newNode;
         } else if (temp == nullptr) {
             plane* newNode = new plane(id, fuel);
+            newNode->next = nullptr;
             newNode->prev = tail;
             tail->next = newNode;
             tail = newNode;

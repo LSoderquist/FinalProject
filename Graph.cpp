@@ -18,6 +18,11 @@ void Graph::addEdge(string v1, string v2, int weight){
                     av.v = &vertices[j];
                     av.weight = weight;
                     vertices[i].adj.push_back(av);
+
+                    adjVertex av2;
+                    av2.v = &vertices[i];
+                    av2.weight = weight;
+                    vertices[j].adj.push_back(av2);
                 }
             }
         }
@@ -77,4 +82,57 @@ vertex* Graph::findVertex(std::string name){
 void Graph::addPlane(string airport, int id, int fuel) {
     vertex* a = findVertex(airport);
     a->planes.insertPlane(id, fuel);
+}
+
+int Graph::numPlanesAtAirport(string airport) {
+    vertex* v = findVertex(airport);
+    return v->planes.countPlanes();
+}
+
+void Graph::printShortestPath(string v1, string v2) {
+    vertex* start = findVertex(v1);
+    vertex* end;
+    start->distance = 0;
+    start->visited = true;
+    start->parent = nullptr;
+    vector<vertex*> found;
+    while (!allVerticesVisited()) {
+        
+    }
+
+    vector<string> path;
+    vertex* temp = end;
+    while (temp != nullptr) {
+        path.push_back(temp->name);
+        temp = temp->parent;
+    }
+
+    for (int i = path.size() - 1; i >= 0; i--) {
+        if (i== 0) cout << path[i] << endl;
+        else cout << path[i] << "-->" << endl;
+    }
+}
+
+vertex* Graph::getMinNode(){
+    int min = INT_MAX;
+    vertex* result;
+
+    for (int i = 0; i < vertices.size(); i++) {
+        if (!vertices[i].visited) {
+            if (vertices[i].distance < min) {
+                min = vertices[i].distance;
+                result = &vertices[i];
+            }
+        }
+    }
+    cout << min << endl;
+    return result;
+} 
+
+bool Graph::allVerticesVisited() {
+    bool allVisited = true;
+    for (int i = 0; i < vertices.size(); i++) {
+        if (!vertices[i].visited) allVisited = false;
+    }
+    return allVisited;
 }

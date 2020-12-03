@@ -1,5 +1,4 @@
 #include "Graph.h"
-#include "LL.h"
 
 using namespace std;
 
@@ -39,7 +38,20 @@ int main() {
     g.addEdge("Charlotte", "Miami", 654);
     g.addEdge("New York City", "Boston", 190);
     g.addEdge("New York City", "Miami", 1092);
+    g.addEdge("Boston", "Miami", 1258);
 
-    
+    g.addPlane("San Francisco", 0, 50);
+    g.addPlane("Los Angeles", 1, 30);
+    g.addPlane("Seattle", 2, 60);
+    g.addPlane("Denver", 3, 80);
+    g.addPlane("Houston", 4, 90);
+    g.addPlane("Chicago", 5, 80);
+    g.addPlane("Charlotte", 6, 60);
+    g.addPlane("New York City", 7, 110);
+    g.addPlane("Boston", 8, 40);
+    g.addPlane("Miami", 9, 60);
+
+    g.printShortestPath("Seattle", "Miami");
+
     return 0;
 }
