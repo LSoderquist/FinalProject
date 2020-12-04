@@ -51,7 +51,8 @@ int main() {
     g.addPlane("Boston", 8, 40);
     g.addPlane("Miami", 9, 60);
 
-    g.printShortestPath("Seattle", "Miami");
+    g.displayEdges();
+    g.printShortestPath("Houston", "San Francisco");
 
     return 0;
 }

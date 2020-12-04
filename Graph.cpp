@@ -91,13 +91,34 @@ int Graph::numPlanesAtAirport(string airport) {
 
 void Graph::printShortestPath(string v1, string v2) {
     vertex* start = findVertex(v1);
-    vertex* end;
+    vertex* end = findVertex(v2);
+    if (start == nullptr || end == nullptr) {
+        if (start == nullptr) cout << "City " << v1 << " is not valid" << endl;
+        if (end == nullptr) cout << "City " << v2 << " is not valid" << endl;
+        return;
+    }
     start->distance = 0;
     start->visited = true;
     start->parent = nullptr;
     vector<vertex*> found;
+    found.push_back(start);
     while (!allVerticesVisited()) {
-        
+        for (int i = 0; i < found.size(); i++) {
+            for (int j = 0; j < found[i]->adj.size(); j++) {
+                if (!found[i]->adj[j].v->visited && found[i]->distance + found[i]->adj[j].weight < found[i]->adj[j].v->distance) {
+                    found[i]->adj[j].v->distance = found[i]->distance + found[i]->adj[j].weight;
+                    found[i]->adj[j].v->parent = found[i];
+                }
+            }
+        }
+
+        vertex* min = getMinNode();
+        if (min == end) {
+            break;
+        }
+
+        min->visited = true;
+        found.push_back(min);
     }
 
     vector<string> path;
@@ -109,7 +130,7 @@ void Graph::printShortestPath(string v1, string v2) {
 
     for (int i = path.size() - 1; i >= 0; i--) {
         if (i== 0) cout << path[i] << endl;
-        else cout << path[i] << "-->" << endl;
+        else cout << path[i] << "-->";
     }
 }
 
@@ -125,7 +146,6 @@ vertex* Graph::getMinNode(){
             }
         }
     }
-    cout << min << endl;
     return result;
 } 
 
