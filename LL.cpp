@@ -39,6 +39,33 @@ void LL::insertPlane(int id, int fuel) {
     }
 }
 
+plane* LL::removePlane(int id) {
+    plane* temp = searchFor(id);
+    if (temp == nullptr) {
+        cout << "Plane " << id << " is not at this airport" << endl;
+        return nullptr;
+    }
+
+    if (temp == head && temp == tail) {
+        head = nullptr;
+        tail = nullptr;
+    } else if (temp == head) {
+        head = temp->next;
+        head->prev = nullptr;
+        temp->next = nullptr;
+    } else if (temp == tail) {
+        tail = temp->prev;
+        tail->next = nullptr;
+        temp->prev = nullptr;
+    } else {
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        temp->next = nullptr;
+        temp->prev = nullptr;
+    }
+    return temp;
+}
+
 plane* LL::searchFor(int id) {
     plane* temp = head;
     while (temp != nullptr) {

@@ -18,6 +18,7 @@ class LL {
     public: 
         LL();
         void insertPlane(int id, int fuel);
+        plane* removePlane(int id);
         plane* searchFor(int id);
         int countPlanes();
         void print();

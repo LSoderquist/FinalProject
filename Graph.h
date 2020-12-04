@@ -33,8 +33,10 @@ class Graph
         void addPlane(std::string airport, int id, int fuel);
         int numPlanesAtAirport(std::string airport);
         void printShortestPath(std::string v1, std::string v2);
+        void fly(int id, std::string v1, std::string v2);
     protected:
     private:
+        int PLANE_MPG = 60;
         std::vector<vertex> vertices;
         vertex* findVertex(std::string name);
         vertex* getMinNode();

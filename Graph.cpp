@@ -132,6 +132,12 @@ void Graph::printShortestPath(string v1, string v2) {
         if (i== 0) cout << path[i] << endl;
         else cout << path[i] << "-->";
     }
+
+    for (int i = 0; i < vertices.size(); i++) {
+        vertices[i].distance = INT_MAX;
+        vertices[i].parent = nullptr;
+        vertices[i].visited = false;
+    }
 }
 
 vertex* Graph::getMinNode(){
@@ -155,4 +161,38 @@ bool Graph::allVerticesVisited() {
         if (!vertices[i].visited) allVisited = false;
     }
     return allVisited;
+}
+
+void Graph::fly(int id, string v1, string v2) {
+    vertex* start = findVertex(v1);
+    vertex* end = findVertex(v2);
+    if (start == nullptr || end == nullptr) {
+        if (start == nullptr) cout << "City " << v1 << " is not valid" << endl;
+        if (end == nullptr) cout << "City " << v2 << " is not valid" << endl;
+        return;
+    }
+
+    plane* p = start->planes.searchFor(id);
+    if (p == nullptr) {
+        cout << "The plane with the id " << id << " was not found at the airport " << v1 << endl;
+        return;
+    }
+
+    int distance;
+    for (int i = 0; i < start->adj.size(); i++) {
+        if (start->adj[i].v == end) {
+            distance = start->adj[i].weight;
+        }
+    }
+
+    if (distance > p->fuel * PLANE_MPG) {
+        cout << "Plane " << id << " does not have enough fuel to travel this distance" << endl;
+    } else {
+        start->planes.removePlane(id);
+        p->fuel -= distance / PLANE_MPG;
+        end->planes.insertPlane(id, p->fuel);
+        delete p;
+
+        cout << "Flight Successful" << endl;
+    }
 }

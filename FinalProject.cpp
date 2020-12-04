@@ -52,7 +52,11 @@ int main() {
     g.addPlane("Miami", 9, 60);
 
     g.displayEdges();
-    g.printShortestPath("Houston", "San Francisco");
+    cout << g.numPlanesAtAirport("San Francisco") << endl;
+    cout << g.numPlanesAtAirport("Los Angeles") << endl;
+    g.fly(0, "San Francisco", "Los Angeles");
+    cout << g.numPlanesAtAirport("San Francisco") << endl;
+    cout << g.numPlanesAtAirport("Los Angeles") << endl;
 
     return 0;
 }
