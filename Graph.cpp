@@ -29,17 +29,18 @@ void Graph::addEdge(string v1, string v2, int weight){
     }
 }
 
-void Graph::addVertex(string n){
+void Graph::addVertex(string n, int capacity){
     bool found = false;
     for(int i = 0; i < vertices.size(); i++){
         if(vertices[i].name == n){
             found = true;
-            cout<<vertices[i].name<<" found."<<endl;
+            cout<<vertices[i].name<<" found"<<endl;
         }
     }
     if(found == false){
         vertex v;
         v.name = n;
+        v.capacity = capacity;
         vertices.push_back(v);
 
     }
@@ -79,9 +80,9 @@ vertex* Graph::findVertex(std::string name){
     return NULL;
 }
 
-void Graph::addPlane(string airport, int id, int fuel) {
+void Graph::addPlane(string airport, int id, int fuel, int fuelCapacity) {
     vertex* a = findVertex(airport);
-    a->planes.insertPlane(id, fuel);
+    a->planes.insertPlane(id, fuel, fuelCapacity);
 }
 
 int Graph::numPlanesAtAirport(string airport) {
@@ -178,6 +179,16 @@ void Graph::fly(int id, string v1, string v2) {
         return;
     }
 
+    if (flightExists(v1, v2) == -1) {
+        cout << "There are no flights from " << v1 << " to " << v2 << endl;
+        return;
+    }
+
+    if (end->planes.countPlanes() + 1 > end->capacity) {
+        cout << v2 << "is currently at capacity" << endl;
+        return;
+    }
+
     int distance;
     for (int i = 0; i < start->adj.size(); i++) {
         if (start->adj[i].v == end) {
@@ -190,9 +201,35 @@ void Graph::fly(int id, string v1, string v2) {
     } else {
         start->planes.removePlane(id);
         p->fuel -= distance / PLANE_MPG;
-        end->planes.insertPlane(id, p->fuel);
+        end->planes.insertPlane(id, p->fuel, p->fuelCapacity);
         delete p;
 
         cout << "Flight Successful" << endl;
     }
+}
+
+void Graph::printInfo() {
+    for (int i = 0; i < vertices.size(); i++) {
+        cout << "---" << vertices[i].name << "---" << endl;
+        vertices[i].planes.print();
+    }
+}
+
+void Graph::addFuel(string airport, int id, int fuel) {
+    vertex* a = findVertex(airport);
+    if (a == nullptr) {
+        cout << "Airport " << airport << " not found" << endl;
+        return;
+    }
+    
+    plane* p = a->planes.searchFor(id);
+    if (p == nullptr) {
+        cout << "Plane " << id << " not found at airport " << airport << endl;
+        return;
+    }
+
+    if (p->fuel + fuel > p->fuelCapacity) {
+        p->fuel = p->fuelCapacity;
+        cout << "This amount of fuel would fill the plane beyond its fuel capacity. The plane has been filled to its maximum fuel capacity." << endl;
+    } else p->fuel += fuel;
 }

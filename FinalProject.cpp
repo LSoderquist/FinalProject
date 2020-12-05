@@ -4,16 +4,16 @@ using namespace std;
 
 int main() {
     Graph g;
-    g.addVertex("San Francisco");
-    g.addVertex("Los Angeles");
-    g.addVertex("Seattle");
-    g.addVertex("Denver");
-    g.addVertex("Houston");
-    g.addVertex("Chicago");
-    g.addVertex("Charlotte");
-    g.addVertex("New York City");
-    g.addVertex("Boston");
-    g.addVertex("Miami");
+    g.addVertex("San Francisco", 5);
+    g.addVertex("Los Angeles", 5);
+    g.addVertex("Seattle", 5);
+    g.addVertex("Denver", 5);
+    g.addVertex("Houston", 5);
+    g.addVertex("Chicago", 5);
+    g.addVertex("Charlotte", 5);
+    g.addVertex("New York City", 5);
+    g.addVertex("Boston", 5);
+    g.addVertex("Miami", 5);
 
     g.addEdge("San Francisco", "Los Angeles", 348);
     g.addEdge("San Francisco", "Seattle", 679);
@@ -40,23 +40,18 @@ int main() {
     g.addEdge("New York City", "Miami", 1092);
     g.addEdge("Boston", "Miami", 1258);
 
-    g.addPlane("San Francisco", 0, 50);
-    g.addPlane("Los Angeles", 1, 30);
-    g.addPlane("Seattle", 2, 60);
-    g.addPlane("Denver", 3, 80);
-    g.addPlane("Houston", 4, 90);
-    g.addPlane("Chicago", 5, 80);
-    g.addPlane("Charlotte", 6, 60);
-    g.addPlane("New York City", 7, 110);
-    g.addPlane("Boston", 8, 40);
-    g.addPlane("Miami", 9, 60);
+    g.addPlane("San Francisco", 0, 5, 200);
+    g.addPlane("Los Angeles", 1, 30, 200);
+    g.addPlane("Seattle", 2, 60, 200);
+    g.addPlane("Denver", 3, 80, 200);
+    g.addPlane("Houston", 4, 90, 200);
+    g.addPlane("Chicago", 5, 80, 200);
+    g.addPlane("Charlotte", 6, 60, 200);
+    g.addPlane("New York City", 7, 110, 200);
+    g.addPlane("Boston", 8, 40, 200);
+    g.addPlane("Miami", 9, 60, 200);
 
-    g.displayEdges();
-    cout << g.numPlanesAtAirport("San Francisco") << endl;
-    cout << g.numPlanesAtAirport("Los Angeles") << endl;
-    g.fly(0, "San Francisco", "Los Angeles");
-    cout << g.numPlanesAtAirport("San Francisco") << endl;
-    cout << g.numPlanesAtAirport("Los Angeles") << endl;
+    
 
     return 0;
 }

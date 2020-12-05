@@ -4,9 +4,9 @@ using namespace std;
 
 LL::LL(){}
 
-void LL::insertPlane(int id, int fuel) {
+void LL::insertPlane(int id, int fuel, int fuelCapacity) {
     if (head == nullptr && tail == nullptr) {
-        plane* temp = new plane(id, fuel);
+        plane* temp = new plane(id, fuel, fuelCapacity);
         temp->next = nullptr;
         temp->prev = nullptr;
         head = temp;
@@ -18,19 +18,19 @@ void LL::insertPlane(int id, int fuel) {
         }
         
         if (temp == head) {
-            plane* newNode = new plane(id, fuel);
+            plane* newNode = new plane(id, fuel, fuelCapacity);
             newNode->prev = nullptr;
             newNode->next = head;
             head->prev = newNode;
             head = newNode;
         } else if (temp == nullptr) {
-            plane* newNode = new plane(id, fuel);
+            plane* newNode = new plane(id, fuel, fuelCapacity);
             newNode->next = nullptr;
             newNode->prev = tail;
             tail->next = newNode;
             tail = newNode;
         } else {
-            plane* newNode = new plane(id, fuel);
+            plane* newNode = new plane(id, fuel, fuelCapacity);
             newNode->next = temp;
             newNode->prev = temp->prev;
             temp->prev->next = newNode;
