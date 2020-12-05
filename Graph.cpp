@@ -29,20 +29,20 @@ void Graph::addEdge(string v1, string v2, int weight){
     }
 }
 
-void Graph::addVertex(string n, int capacity){
+void Graph::addVertex(string n, int capacity, string city){
     bool found = false;
     for(int i = 0; i < vertices.size(); i++){
         if(vertices[i].name == n){
             found = true;
-            cout<<vertices[i].name<<" found"<<endl;
+            cout<<vertices[i].name<<" already exists"<<endl;
         }
     }
     if(found == false){
         vertex v;
         v.name = n;
         v.capacity = capacity;
+        v.city = city;
         vertices.push_back(v);
-
     }
 }
 
@@ -60,14 +60,17 @@ void Graph::displayEdges()
 }
 
 int Graph::flightExists(std::string v1, std::string v2){
-    vertex* v;
-    for (int i = 0; i < vertices.size(); i++) {
-        if (vertices[i].name == v1) v = &vertices[i];
+    vertex* start = findVertex(v1);
+    vertex* end = findVertex(v2);
+    if (start == nullptr || end == nullptr) {
+        if (start == nullptr) cout << "Airport " << v1 << " not found" << endl;
+        if (end == nullptr) cout << "Airport " << v2 << " not found" << endl;
+        return -1;
     }
 
-    for (int i = 0; i < v->adj.size(); i++) {
-        if (v->adj[i].v->name == v2) {
-            return v->adj[i].weight;
+    for (int i = 0; i < start->adj.size(); i++) {
+        if (start->adj[i].v == end) {
+            return start->adj[i].weight;
         }
     }
     return -1;
@@ -87,7 +90,8 @@ void Graph::addPlane(string airport, int id, int fuel, int fuelCapacity) {
 
 int Graph::numPlanesAtAirport(string airport) {
     vertex* v = findVertex(airport);
-    return v->planes.countPlanes();
+    if (v != nullptr) return v->planes.countPlanes();
+    else return -1;
 }
 
 void Graph::printShortestPath(string v1, string v2) {
@@ -134,6 +138,8 @@ void Graph::printShortestPath(string v1, string v2) {
         else cout << path[i] << "-->";
     }
 
+    cout << end->distance << " miles of travel" << endl;
+
     for (int i = 0; i < vertices.size(); i++) {
         vertices[i].distance = INT_MAX;
         vertices[i].parent = nullptr;
@@ -168,8 +174,8 @@ void Graph::fly(int id, string v1, string v2) {
     vertex* start = findVertex(v1);
     vertex* end = findVertex(v2);
     if (start == nullptr || end == nullptr) {
-        if (start == nullptr) cout << "City " << v1 << " is not valid" << endl;
-        if (end == nullptr) cout << "City " << v2 << " is not valid" << endl;
+        if (start == nullptr) cout << "Airport " << v1 << " is not valid" << endl;
+        if (end == nullptr) cout << "Airport " << v2 << " is not valid" << endl;
         return;
     }
 
@@ -185,7 +191,7 @@ void Graph::fly(int id, string v1, string v2) {
     }
 
     if (end->planes.countPlanes() + 1 > end->capacity) {
-        cout << v2 << "is currently at capacity" << endl;
+        cout << v2 << " is currently at capacity" << endl;
         return;
     }
 
@@ -210,7 +216,7 @@ void Graph::fly(int id, string v1, string v2) {
 
 void Graph::printInfo() {
     for (int i = 0; i < vertices.size(); i++) {
-        cout << "---" << vertices[i].name << "---" << endl;
+        cout << "--------------------" << vertices[i].name << "--------------------" << endl;
         vertices[i].planes.print();
     }
 }
@@ -233,3 +239,15 @@ void Graph::addFuel(string airport, int id, int fuel) {
         cout << "This amount of fuel would fill the plane beyond its fuel capacity. The plane has been filled to its maximum fuel capacity." << endl;
     } else p->fuel += fuel;
 }
+
+void Graph::printAirportInfo(string airport) {
+    vertex* a = findVertex(airport);
+    if (a == nullptr) cout << "Airport " << airport << " not found" << endl;
+    else {
+        cout << "--------------------" << airport << "--------------------" << endl;
+        cout << "City name: " << a->city << endl;
+        cout << "Number of planes: " << a->planes.countPlanes() << endl;
+        cout << "Total capacity: " << a->capacity << " planes" << endl;
+    }
+}
+

@@ -88,7 +88,7 @@ int LL::countPlanes() {
 void LL::print() {
     plane* temp = head;
     while (temp != nullptr) {
-        cout << temp->id  << ": " << temp->fuel << endl;
+        cout << "ID: " << temp->id  << " --- " << "Fuel (gallons): " << temp->fuel << endl;
         temp = temp->next;
     }
 }
