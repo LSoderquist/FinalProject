@@ -4,6 +4,8 @@ using namespace std;
 
 int main() {
     Graph g;
+
+    //Starting airports added here
     g.addVertex("SFO", 5, "San Francisco");
     g.addVertex("LAX", 5, "Los Angeles");
     g.addVertex("SEA", 5, "Seattle");
@@ -15,6 +17,7 @@ int main() {
     g.addVertex("BOS", 5, "Boston");
     g.addVertex("MIA", 5, "Miami");
 
+    //Starting flights added here
     g.addEdge("SFO", "LAX", 348);
     g.addEdge("SFO", "SEA", 679);
     g.addEdge("SFO", "DEN", 948);
@@ -40,6 +43,7 @@ int main() {
     g.addEdge("JFK", "MIA", 1092);
     g.addEdge("BOS", "MIA", 1258);
 
+    //Starting planes added here
     g.addPlane("SFO", 0, 5, 200);
     g.addPlane("LAX", 1, 30, 200);
     g.addPlane("SEA", 2, 60, 200);
@@ -51,6 +55,7 @@ int main() {
     g.addPlane("BOS", 8, 40, 200);
     g.addPlane("MIA", 9, 60, 200);
 
+    
     cout << "=====Menu=====\n1. Add Airport\n2. Add Flight\n3. Add Plane\n4. Add Fuel\n5. Fly\n6. Check For Flight\n7. Count Planes at Airport\n8. Display Flights\n9. Print Shortest Path\n10. Print List of Planes\n11. Print Info for Specific Airport\n12. Quit" << endl;
 
     bool exit = false;
