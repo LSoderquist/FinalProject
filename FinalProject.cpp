@@ -67,6 +67,7 @@ int main() {
         switch (choice) {
             case 1: 
             {
+                //Add airport
                 string name;
                 int capacity;
                 string city;
@@ -86,6 +87,7 @@ int main() {
             }
             case 2: 
             {
+                //Add flight
                 string airport1;
                 string airport2;
                 int distance;
@@ -105,6 +107,7 @@ int main() {
             }
             case 3:
             {
+                //Add plane
                 string airport;
                 int id;
                 int fuel;
@@ -130,6 +133,7 @@ int main() {
             }
             case 4:
             {
+                //Add fuel
                 string airport;
                 int id;
                 int fuel;
@@ -150,6 +154,7 @@ int main() {
             }
             case 5:
             {
+                //Fly
                 int id;
                 string airport1;
                 string airport2;
@@ -169,6 +174,7 @@ int main() {
             }
             case 6:
             {
+                //Check for flight
                 string airport1;
                 string airport2;
                 cout << "Enter first airport name: " << endl;
@@ -185,6 +191,7 @@ int main() {
             }
             case 7:
             {
+                //Get num planes at airport
                 string name;
                 cout << "Enter airport name: " << endl;
                 getline(cin, name);
@@ -197,11 +204,13 @@ int main() {
             }
             case 8:
             {
+                //Display flights
                 g.displayEdges();
                 break;
             }
             case 9:
             {
+                //Find shortest path
                 string airport1;
                 string airport2;
                 cout << "Enter first airport name: " << endl;
@@ -216,11 +225,13 @@ int main() {
             }
             case 10:
             {
+                //Print list of planes
                 g.printInfo();
                 break;
             }
             case 11:
             {
+                //Print info for specific airport
                 string airport;
                 cout << "Enter airport name: " << endl;
                 getline(cin, airport);
@@ -231,6 +242,7 @@ int main() {
             }
             case 12:
             {
+                //Quit
                 exit = true;
                 break;
             }

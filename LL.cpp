@@ -5,6 +5,7 @@ using namespace std;
 LL::LL(){}
 
 void LL::insertPlane(int id, int fuel, int fuelCapacity) {
+    //If the head and tail pointers are null, add a node and set both head and tail to that node
     if (head == nullptr && tail == nullptr) {
         plane* temp = new plane(id, fuel, fuelCapacity);
         temp->next = nullptr;
@@ -12,6 +13,7 @@ void LL::insertPlane(int id, int fuel, int fuelCapacity) {
         head = temp;
         tail = temp;
     } else {
+        //Else adds a new plane node and adjusts the head and tail pointers accordingly
         plane* temp = head;
         while (temp != nullptr && temp->id <= id) {
             temp = temp->next;
@@ -40,6 +42,7 @@ void LL::insertPlane(int id, int fuel, int fuelCapacity) {
 }
 
 plane* LL::removePlane(int id) {
+    //Removes plane from linked list
     plane* temp = searchFor(id);
     if (temp == nullptr) {
         cout << "Plane " << id << " is not at this airport" << endl;
@@ -67,6 +70,7 @@ plane* LL::removePlane(int id) {
 }
 
 plane* LL::searchFor(int id) {
+    //Searches the linked list for a plane with the id passed and returns a pointer to a plane
     plane* temp = head;
     while (temp != nullptr) {
         if (temp->id == id) return temp;
@@ -76,6 +80,7 @@ plane* LL::searchFor(int id) {
 }
 
 int LL::countPlanes() {
+    //Loops through the linked list to count the number of planes in the list
     int counter = 0;
     plane* temp = head;
     while (temp != nullptr) {
@@ -86,6 +91,7 @@ int LL::countPlanes() {
 }
 
 void LL::print() {
+    //Prints all planes in the linked list alongside their id and fuel level
     plane* temp = head;
     while (temp != nullptr) {
         cout << "ID: " << temp->id  << " --- " << "Fuel (gallons): " << temp->fuel << endl;
